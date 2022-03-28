@@ -9,12 +9,15 @@
 
 class DeliverMan {
 private:
-    int maxVolume;
-    int maxWeight;
-    int cost;
+    int id;
+    static int current_id;
+    int maxVol;
+    int maxW;
+    float cost;
     std::string carPlate;
     std::vector<Deliver*> delivers;
-
+public:
+    DeliverMan(int maxVol, int maxW, float cost);
 };
 
 

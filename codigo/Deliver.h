@@ -9,12 +9,15 @@
 #include <vector>
 
 class Deliver {
-private:
+public:
+    int id;
+    static int current_id;
     int volume;
     int weight;
+    float reward;
     int duration;
-    int reward;
-
+public:
+    Deliver(int volume, int weight, float reward, int duration);
 };
 
 

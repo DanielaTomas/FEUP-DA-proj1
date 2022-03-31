@@ -9,7 +9,7 @@
 #include <vector>
 
 class Deliver {
-public:
+private:
     int id;
     static int current_id;
     int volume;

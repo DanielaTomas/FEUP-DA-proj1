@@ -14,9 +14,11 @@ void parseString(std::string& line, std::vector<std::string>& values) {
     }
 }
 
-void readFiles(std::vector<DeliverMan>& deliverMen, std::vector<Deliver>& delivers) {
+void readFiles(StorageUnit& storageUnit) {
 
     std::ifstream file;
+    std::vector<DeliverMan> deliverMen;
+    std::vector<Deliver> delivers;
 
     file.open("../../dataset/carrinhas.txt");
 
@@ -38,6 +40,9 @@ void readFiles(std::vector<DeliverMan>& deliverMen, std::vector<Deliver>& delive
 
     parseFile(file, delivers);
 
+    storageUnit.setDeliverMen(deliverMen);
+    storageUnit.setDelivers(delivers);
+
     file.close();
 }
 
@@ -56,7 +61,6 @@ void parseFile(std::ifstream& file, std::vector<T>& objects) {
 
     }
 }
-
 
 void createObject(std::vector<DeliverMan>& deliverMen, std::vector<std::string>& values) {
 

@@ -13,11 +13,17 @@ private:
     static int current_id;
     int maxVol;
     int maxW;
+    int remainingVol;
+    int remainingW;
     float cost;
     std::string carPlate;
-    std::vector<Deliver*> delivers;
+    std::vector<Deliver> delivers;
+    bool full;
 public:
     DeliverMan(int maxVol, int maxW, float cost);
+    int getRemainingVol() const;
+    int getRemainingW() const;
+    void addDeliver(Deliver& deliver);
 };
 
 

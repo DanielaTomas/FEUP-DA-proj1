@@ -20,7 +20,7 @@ void readFiles(StorageUnit& storageUnit) {
     std::vector<DeliverMan> deliverMen;
     std::vector<Deliver> delivers;
 
-    file.open("../../dataset/carrinhas.txt");
+    file.open("../../dataset/carrinhas_test.txt");
 
     if(!file.is_open()) {
         std::cout << "Error opening file!" << std::endl;
@@ -31,7 +31,7 @@ void readFiles(StorageUnit& storageUnit) {
 
     file.close();
 
-    file.open("../../dataset/encomendas.txt");
+    file.open("../../dataset/encomendas_test.txt");
 
     if(!file.is_open()) {
         std::cout << "Error opening file!" << std::endl;

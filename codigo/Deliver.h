@@ -18,6 +18,10 @@ private:
     int duration;
 public:
     Deliver(int volume, int weight, float reward, int duration);
+    int getVolume() const;
+    int getWeight() const;
+    float getReward() const;
+    friend bool operator<(const Deliver& d1, const Deliver& d2);
 };
 
 

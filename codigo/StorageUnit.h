@@ -14,10 +14,11 @@ private:
     std::vector<Deliver> allDelivers;
     std::vector<DeliverMan> allDeliverMen;
 public:
-    std::vector<Deliver> getDelivers();
-    std::vector<DeliverMan> getDeliverMen();
+    std::vector<Deliver> getDelivers() const;
+    std::vector<DeliverMan> getDeliverMen() const;
     void setDelivers(std::vector<Deliver>& delivers);
     void setDeliverMen(std::vector<DeliverMan>& deliverMen);
+
 
 };
 

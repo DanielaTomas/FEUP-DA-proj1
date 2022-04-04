@@ -4,11 +4,11 @@
 
 #include "StorageUnit.h"
 
-std::vector<Deliver> StorageUnit::getDelivers() {
+std::vector<Deliver> StorageUnit::getDelivers() const{
     return this->allDelivers;
 }
 
-std::vector<DeliverMan> StorageUnit::getDeliverMen() {
+std::vector<DeliverMan> StorageUnit::getDeliverMen() const{
     return this->allDeliverMen;
 }
 

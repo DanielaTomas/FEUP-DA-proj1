@@ -1,7 +1,3 @@
-//
-// Created by berna on 27/03/2022.
-//
-
 #include "Deliver.h"
 
 int Deliver::current_id = 0;

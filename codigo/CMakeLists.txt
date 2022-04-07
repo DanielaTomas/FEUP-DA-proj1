@@ -3,4 +3,4 @@ project(codigo)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(codigo main.cpp Deliver.cpp Deliver.h DeliverMan.cpp DeliverMan.h StorageUnit.cpp StorageUnit.h Utils.cpp Utils.h)
+add_executable(codigo main.cpp Deliver.cpp Deliver.h DeliverMan.cpp DeliverMan.h Utils.cpp Utils.h)

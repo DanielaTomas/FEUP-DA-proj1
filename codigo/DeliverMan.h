@@ -1,7 +1,3 @@
-//
-// Created by berna on 27/03/2022.
-//
-
 #ifndef CODIGO_DELIVERMAN_H
 #define CODIGO_DELIVERMAN_H
 
@@ -23,7 +19,7 @@ public:
     DeliverMan(int maxVol, int maxW, float cost);
     int getRemainingVol() const;
     int getRemainingW() const;
-    void addDeliver(Deliver& deliver);
+    bool addDeliver(Deliver& deliver);
 };
 
 

@@ -1,7 +1,3 @@
-//
-// Created by berna on 28/03/2022.
-//
-
 #include "Utils.h"
 
 void parseString(std::string& line, std::vector<std::string>& values) {
@@ -14,11 +10,9 @@ void parseString(std::string& line, std::vector<std::string>& values) {
     }
 }
 
-void readFiles(StorageUnit& storageUnit) {
+void readFiles(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deliverMen) {
 
     std::ifstream file;
-    std::vector<DeliverMan> deliverMen;
-    std::vector<Deliver> delivers;
 
     file.open("../../dataset/carrinhas_test.txt");
 
@@ -39,9 +33,6 @@ void readFiles(StorageUnit& storageUnit) {
     }
 
     parseFile(file, delivers);
-
-    storageUnit.setDeliverMen(deliverMen);
-    storageUnit.setDelivers(delivers);
 
     file.close();
 }

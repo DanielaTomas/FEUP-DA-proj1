@@ -1,7 +1,3 @@
-//
-// Created by berna on 28/03/2022.
-//
-
 #ifndef CODIGO_UTILS_H
 #define CODIGO_UTILS_
 
@@ -10,10 +6,9 @@
 #include <vector>
 #include <sstream>
 #include "DeliverMan.h"
-#include "StorageUnit.h"
 
 void parseString(std::string& line, std::vector<std::string>& values);
-void readFiles(StorageUnit& storageUnit);
+void readFiles(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deliverMen);
 template <typename T>
 void parseFile(std::ifstream& file, std::vector<T>& objects);
 void createObject(std::vector<DeliverMan>& deliverMen, std::vector<std::string>& values);

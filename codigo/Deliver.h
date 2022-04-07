@@ -1,7 +1,3 @@
-//
-// Created by berna on 27/03/2022.
-//
-
 #ifndef CODIGO_DELIVER_H
 #define CODIGO_DELIVER_H
 

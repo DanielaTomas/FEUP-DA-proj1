@@ -2,26 +2,47 @@
 #include <algorithm>
 #include "DeliverMan.h"
 #include "Utils.h"
-#include "StorageUnit.h"
+using namespace std;
 
-bool firstScenery(StorageUnit& storageUnit) {
+bool firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deliverMen) {
 
-    std::cout << "1" << std::endl;
+    //Bin packing
+
+    //Ordenar encomendas por peso e largura
+
+    sort(delivers.begin(), delivers.end());
+
+    //First fit: Vai pondo cada encomenda logo no primeiro estafeta que der.
+    for(auto deliver: delivers) {
+        for(auto & i : deliverMen) {
+            if(i.addDeliver(deliver)) {
+                break;
+            }
+        }
+    }
+
+    //Best fit: Vai pondo cada encomenda no melhor estafeta(no que sobrar menos espaço).
+
 
     return false;
 }
 
 
-bool secondScenery(StorageUnit& storageUnit) {
+bool secondScenery(std::vector<Deliver> delivers, std::vector<DeliverMan> deliverMen) {
+    //knapsack(mochila)
+    //ordenar materiais por ordem decrescente de racio valor/peso
 
-    std::cout << "2" << std::endl;
+    //se couber tudo, incluir tudo e continuar para o proximo
+    //se n couber na totalidade, incluir o maximo possivel e terminar..
+
+    //(Relatório)--Complexidade..Ordenar(nlogn)..Processar(n)..Total(nlogn)
 
     return false;
 }
 
-bool thirdScenery(StorageUnit& storageUnit) {
+bool thirdScenery(std::vector<Deliver> delivers, std::vector<DeliverMan> deliverMen) {
 
-    std::cout << "3" << std::endl;
+    //Job scheduling
 
     return false;
 }
@@ -29,23 +50,24 @@ bool thirdScenery(StorageUnit& storageUnit) {
 
 int main() {
 
-    StorageUnit storageUnit;
+    std::vector<Deliver> delivers;
+    std::vector<DeliverMan> deliverMen;
     int num;
 
-    readFiles(storageUnit);
+    readFiles(delivers, deliverMen);
 
     std::cout << "Choose a Scenery: " << std::endl;
     std::cin >> num;
 
     switch(num) {
         case 1:
-            firstScenery(storageUnit);
+            firstScenery(delivers, deliverMen);
             break;
         case 2:
-            secondScenery(storageUnit);
+            secondScenery(delivers, deliverMen);
             break;
         case 3:
-            thirdScenery(storageUnit);
+            thirdScenery(delivers, deliverMen);
             break;
         default:
             break;

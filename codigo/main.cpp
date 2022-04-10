@@ -15,7 +15,7 @@ int firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& delive
     reverse(delivers.begin(), delivers.end());
 
     //First fit: Vai pondo cada encomenda logo no primeiro estafeta que der.
-    for(auto deliver: delivers) {
+    for(auto deliver : delivers) {
         for(auto & i : deliverMen) {
             if(i.addDeliver(deliver)) {
                 break;
@@ -29,7 +29,6 @@ int firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& delive
     return false;
 }
 
-
 bool secondScenery(std::vector<Deliver> delivers, std::vector<DeliverMan> deliverMen) {
     //knapsack(mochila)
     //ordenar materiais por ordem decrescente de racio valor/peso
@@ -42,13 +41,32 @@ bool secondScenery(std::vector<Deliver> delivers, std::vector<DeliverMan> delive
     return false;
 }
 
-bool thirdScenery(std::vector<Deliver> delivers, std::vector<DeliverMan> deliverMen) {
-
+bool compareDuration(const Deliver &d1, const Deliver &d2) {
+    return d1.getDuration() < d2.getDuration();
+}
+float thirdScenery(std::vector<Deliver> delivers) {
     //Job scheduling
 
-    return false;
-}
+    //sort by duration (shorter deliveries first)
+    sort(delivers.begin(), delivers.end(),compareDuration);
 
+    int maxDelivers= 0, sum = 0;
+    for(int i = 0; i < delivers.size(); i++) {
+        if(sum+delivers[i].getDuration() <= 28800) {   //9h00-17h00 -> 8 hours = 28800 seconds
+            sum += delivers[i].getDuration();
+            maxDelivers++;
+        }
+        else {
+            delivers.erase(delivers.begin()+i,delivers.end());
+            break;
+        }
+    }
+
+    float avgTime = (float)sum/(float)maxDelivers;
+    printf("Average time: %.2f seconds\n",avgTime);
+
+    return avgTime;
+}
 
 int main() {
 
@@ -69,7 +87,7 @@ int main() {
             secondScenery(delivers, deliverMen);
             break;
         case 3:
-            thirdScenery(delivers, deliverMen);
+            thirdScenery(delivers);
             break;
         default:
             break;

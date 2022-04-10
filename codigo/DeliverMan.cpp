@@ -34,4 +34,29 @@ bool DeliverMan::addDeliver(Deliver &deliver) {
     return true;
 }
 
+bool operator==(const DeliverMan &d1, const DeliverMan &d2) {
+
+    return d1.id == d2.id;
+}
+
+bool operator<(const DeliverMan &d1, const DeliverMan &d2) {
+
+    if(d1.id < d2.id) {
+        return true;
+    }else if(d1.id > d2.id) {
+        return false;
+    }else {
+        if(d1.maxVol < d2.maxVol) {
+            return true;
+        }else if(d1.maxVol > d2.maxVol) {
+            return false;
+        }else {
+            if(d1.maxW < d2.maxW) {
+                return true;
+            }else {
+                return false;
+            }
+        }
+    }
+}
 

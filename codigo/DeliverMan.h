@@ -46,6 +46,12 @@ public:
     //! \param deliver
     //! \return bool
     bool addDeliver(Deliver& deliver);
+
+
+    friend bool operator==(const DeliverMan& d1, const DeliverMan& d2);
+
+
+    friend bool operator<(const DeliverMan& d1, const DeliverMan& d2);
 };
 
 

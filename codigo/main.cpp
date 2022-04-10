@@ -10,23 +10,24 @@ int firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& delive
     //Bin packing
 
     //Ordenar encomendas por peso e largura
+    std::set<DeliverMan> result;
 
     sort(delivers.begin(), delivers.end());
     reverse(delivers.begin(), delivers.end());
 
     //First fit: Vai pondo cada encomenda logo no primeiro estafeta que der.
     for(auto deliver : delivers) {
-        for(auto & i : deliverMen) {
-            if(i.addDeliver(deliver)) {
+        for(auto & deliverMan : deliverMen) {
+            if(deliverMan.addDeliver(deliver)) {
+                result.insert(deliverMan);
                 break;
             }
         }
     }
 
     //Best fit: Vai pondo cada encomenda no melhor estafeta(no que sobrar menos espaço).
-
-
-    return false;
+    
+    return result.size();
 }
 
 bool secondScenery(std::vector<Deliver> delivers, std::vector<DeliverMan> deliverMen) {
@@ -63,7 +64,10 @@ float thirdScenery(std::vector<Deliver> delivers) {
     }
 
     float avgTime = (float)sum/(float)maxDelivers;
-    printf("Average time: %.2f seconds\n",avgTime);
+    float avgTimeHours = avgTime/120;
+    printf("Average time: %.2f seconds\n", avgTime);
+    cout << "Average time: " << avgTimeHours << " hours." << endl;
+
 
     return avgTime;
 }
@@ -76,12 +80,12 @@ int main() {
 
     readFiles(delivers, deliverMen);
 
-    std::cout << "Choose a Scenery: " << std::endl;
+    std::cout << "Choose a Scenery: ";
     std::cin >> num;
 
     switch(num) {
         case 1:
-            firstScenery(delivers, deliverMen);
+            cout << "Numero de estafetas usados: " << firstScenery(delivers, deliverMen) << endl;
             break;
         case 2:
             secondScenery(delivers, deliverMen);

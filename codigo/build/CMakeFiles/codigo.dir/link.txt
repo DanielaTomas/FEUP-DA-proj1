@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/codigo.dir/main.cpp.o CMakeFiles/codigo.dir/Deliver.cpp.o CMakeFiles/codigo.dir/DeliverMan.cpp.o CMakeFiles/codigo.dir/Utils.cpp.o  -o codigo 

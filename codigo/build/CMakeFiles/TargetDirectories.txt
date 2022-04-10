@@ -1,0 +1,4 @@
+/home/danielatomas/2ºano/DA/DA_proj/codigo/build/CMakeFiles/rebuild_cache.dir
+/home/danielatomas/2ºano/DA/DA_proj/codigo/build/CMakeFiles/edit_cache.dir
+/home/danielatomas/2ºano/DA/DA_proj/codigo/build/CMakeFiles/docs.dir
+/home/danielatomas/2ºano/DA/DA_proj/codigo/build/CMakeFiles/codigo.dir

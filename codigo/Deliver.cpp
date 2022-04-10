@@ -22,18 +22,18 @@ float Deliver::getReward() const {
     return this->reward;
 }
 
+int Deliver::getDuration() const {
+    return this->duration;
+}
+
 bool operator<(const Deliver &d1, const Deliver &d2) {
 
     if(d1.volume < d2.volume) {
         return true;
-    }else if(d1.volume > d2.volume) {
-        return false;
-    }else {
-        if(d1.weight < d2.weight) {
-            return true;
-        } else {
-            return false;
-        }
     }
+    else if(d1.volume > d2.volume) {
+        return false;
+    }
+    return d1.weight < d2.weight;
 
 }

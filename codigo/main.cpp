@@ -1,16 +1,18 @@
 #include <iostream>
 #include <algorithm>
+#include <set>
 #include "DeliverMan.h"
 #include "Utils.h"
 using namespace std;
 
-bool firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deliverMen) {
+int firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deliverMen) {
 
     //Bin packing
 
     //Ordenar encomendas por peso e largura
 
     sort(delivers.begin(), delivers.end());
+    reverse(delivers.begin(), delivers.end());
 
     //First fit: Vai pondo cada encomenda logo no primeiro estafeta que der.
     for(auto deliver: delivers) {

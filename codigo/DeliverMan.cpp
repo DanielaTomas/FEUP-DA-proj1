@@ -23,7 +23,7 @@ int DeliverMan::getRemainingW() const {
 
 bool DeliverMan::addDeliver(Deliver &deliver) {
 
-    if(this->remainingVol - deliver.getVolume() <= 0 || remainingW - deliver.getWeight() <= 0) {
+    if(this->remainingVol - deliver.getVolume() < 0 || remainingW - deliver.getWeight() < 0) {
         return false;
     }
 
@@ -33,4 +33,5 @@ bool DeliverMan::addDeliver(Deliver &deliver) {
 
     return true;
 }
+
 

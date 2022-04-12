@@ -5,29 +5,94 @@
 #include "Utils.h"
 using namespace std;
 
+
+int checkBestFit(set<DeliverMan*>& usedDeliverMen, Deliver& deliver) {
+
+    int volume = 999999;
+    int weight = 999999;
+    int id = -1;
+
+    for(auto & usedDeliverMan : usedDeliverMen) {
+        if(deliver.getWeight() <= usedDeliverMan->getRemainingW()
+        && deliver.getVolume() <= usedDeliverMan->getRemainingVol()) {
+            if(usedDeliverMan->getRemainingVol() < volume
+            && usedDeliverMan->getRemainingW() < weight) {
+                volume = usedDeliverMan->getRemainingVol();
+                weight = usedDeliverMan->getRemainingW();
+                id = usedDeliverMan->getId();
+            }
+        }
+    }
+
+    return id;
+}
+
+DeliverMan& searchForDeliverMan(int id, vector<DeliverMan>& deliverMen) {
+
+    for(auto & deliverMan : deliverMen) {
+        if(deliverMan.getId() == id) {
+            return deliverMan;
+        }
+    }
+    DeliverMan deliverMan1;
+
+    return deliverMan1;
+}
+
+
 int firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deliverMen) {
 
     //Bin packing
 
-    //Ordenar encomendas por peso e largura
-    std::set<DeliverMan> result;
-
     sort(delivers.begin(), delivers.end());
     reverse(delivers.begin(), delivers.end());
 
+    vector<DeliverMan> deliverMenFF = deliverMen;
+    std::set<DeliverMan> resultFF;
+
     //First fit: Vai pondo cada encomenda logo no primeiro estafeta que der.
     for(auto deliver : delivers) {
-        for(auto & deliverMan : deliverMen) {
+        for(auto & deliverMan : deliverMenFF) {
             if(deliverMan.addDeliver(deliver)) {
-                result.insert(deliverMan);
+                resultFF.insert(deliverMan);
                 break;
             }
         }
     }
 
+    vector<DeliverMan> deliverMenBF = deliverMen;
+    set<DeliverMan> resultBF;
+
     //Best fit: Vai pondo cada encomenda no melhor estafeta(no que sobrar menos espaço).
-    
-    return result.size();
+    std::set<DeliverMan*> usedDeliverMen;
+    for(auto deliver : delivers) {
+        int deliverManId = checkBestFit(usedDeliverMen, deliver);
+        if(deliverManId != -1) {
+            DeliverMan& deliverMan = searchForDeliverMan(deliverManId, deliverMenBF);
+            if(deliverMan.getId() != -1) {
+                deliverMan.addDeliver(deliver);
+                continue;
+            }
+        }
+        for(auto & deliverMan : deliverMenBF) {
+            if(deliverMan.addDeliver(deliver)) {
+                usedDeliverMen.insert(&deliverMan);
+                resultBF.insert(deliverMan);
+                break;
+            }
+        }
+    }
+
+    cout << "First Fit: " << resultFF.size() << endl;
+    cout << "Best Fit: " << resultBF.size() << endl;
+
+    if(resultFF.size() < resultBF.size()) {
+        deliverMen = deliverMenFF;
+        return resultFF.size();
+    }else {
+        deliverMen = deliverMenBF;
+        return resultBF.size();
+    }
 }
 
 bool secondScenery(std::vector<Deliver> delivers, std::vector<DeliverMan> deliverMen) {
@@ -85,7 +150,7 @@ int main() {
 
     switch(num) {
         case 1:
-            cout << "Numero de estafetas usados: " << firstScenery(delivers, deliverMen) << endl;
+            cout << "Numero de estafetas usados for the best option: " << firstScenery(delivers, deliverMen) << endl;
             break;
         case 2:
             secondScenery(delivers, deliverMen);

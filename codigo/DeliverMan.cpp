@@ -2,6 +2,16 @@
 
 int DeliverMan::current_id = 0;
 
+DeliverMan::DeliverMan() :id(-1) {
+
+    this->maxVol = -1;
+    this->maxW = -1;
+    this->cost = -1;
+    this->full = false;
+    this->remainingW = -1;
+    this->remainingVol = -1;
+}
+
 DeliverMan::DeliverMan(int maxVol, int maxW, float cost) : id(current_id++){
 
     this->maxVol = maxVol;
@@ -13,6 +23,10 @@ DeliverMan::DeliverMan(int maxVol, int maxW, float cost) : id(current_id++){
 
 }
 
+int DeliverMan::getId() const {
+    return this->id;
+}
+
 int DeliverMan::getRemainingVol() const {
     return this->remainingVol;
 }
@@ -21,7 +35,16 @@ int DeliverMan::getRemainingW() const {
     return this->remainingW;
 }
 
+bool DeliverMan::getFull() const {
+    return this->full;
+}
+
 bool DeliverMan::addDeliver(Deliver &deliver) {
+
+    if(this->remainingVol == 0 || this->remainingW == 0) {
+        this->full = true;
+        return false;
+    }
 
     if(this->remainingVol - deliver.getVolume() < 0 || remainingW - deliver.getWeight() < 0) {
         return false;
@@ -59,4 +82,12 @@ bool operator<(const DeliverMan &d1, const DeliverMan &d2) {
         }
     }
 }
+
+/*
+bool operator=(const DeliverMan &d1, const DeliverMan &d2) {
+
+
+
+}
+*/
 

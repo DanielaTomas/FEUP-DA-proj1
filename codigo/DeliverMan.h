@@ -27,6 +27,7 @@ private:
     //! Check if DeliverMan is full
     bool full;
 public:
+    DeliverMan();
     //! Constructor
     //!
     //! \param maxVol Carrying capacity (maximum volume)
@@ -36,6 +37,9 @@ public:
     //! Get Remaining Volume
     //!
     //! \return volume
+
+    int getId() const;
+
     int getRemainingVol() const;
     //! Get Remaining Weight
     //!
@@ -45,13 +49,16 @@ public:
     //!
     //! \param deliver
     //! \return bool
-    bool addDeliver(Deliver& deliver);
 
+    bool getFull() const;
+
+    bool addDeliver(Deliver& deliver);
 
     friend bool operator==(const DeliverMan& d1, const DeliverMan& d2);
 
-
     friend bool operator<(const DeliverMan& d1, const DeliverMan& d2);
+
+    //friend bool operator=(const DeliverMan& d1, const DeliverMan& d2);
 };
 
 

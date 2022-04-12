@@ -3,6 +3,7 @@
 #include <set>
 #include "DeliverMan.h"
 #include "Utils.h"
+#include <cstdlib>
 using namespace std;
 
 int firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deliverMen) {
@@ -29,18 +30,35 @@ int firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& delive
     
     return result.size();
 }
-
-bool secondScenery(std::vector<Deliver> delivers, std::vector<DeliverMan> deliverMen) {
-    //knapsack(mochila)
-    //ordenar materiais por ordem decrescente de racio valor/peso
-
-    //se couber tudo, incluir tudo e continuar para o proximo
-    //se n couber na totalidade, incluir o maximo possivel e terminar..
-
-    //(Relatório)--Complexidade..Ordenar(nlogn)..Processar(n)..Total(nlogn)
-
-    return false;
+bool compareRacio(const Deliver &d1, const Deliver &d2) {
+    return (d1.getReward()/d1.getWeight()) > (d2.getReward()/d2.getWeight());
 }
+bool compareCost(const DeliverMan &dm1, const DeliverMan &dm2) {
+    return dm1.getCost() < dm2.getCost();
+}
+
+bool secondScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deliverMen) {
+    sort(delivers.begin(), delivers.end(),compareRacio);
+    sort(deliverMen.begin(), deliverMen.end(), compareCost);
+    int custo=0;
+    int pagamento=0;
+    bool carrinhausada=false;
+    for(auto deliverMan : deliverMen){
+        for(auto deliver : delivers){
+            if((deliverMan.getRemainingW() >= deliver.getWeight()) && (deliverMan.getRemainingVol()>= deliver.getVolume())) {
+                deliverMan.addDeliver(deliver);
+                pagamento+=deliver.getReward();
+                carrinhausada= true;
+            }
+        }
+        if(carrinhausada==true) {
+            custo += deliverMan.getCost();
+            carrinhausada = false;
+        }
+    }
+    cout<<"Lucro: "<<pagamento-custo<<endl;
+}
+
 
 bool compareDuration(const Deliver &d1, const Deliver &d2) {
     return d1.getDuration() < d2.getDuration();

@@ -37,6 +37,10 @@ public:
     //!
     //! \return volume
     int getRemainingVol() const;
+    //! Get Remaining Cost
+    //!
+    //! \return cost
+    float getCost() const;
     //! Get Remaining Weight
     //!
     //! \return weight

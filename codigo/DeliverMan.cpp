@@ -21,6 +21,10 @@ int DeliverMan::getRemainingW() const {
     return this->remainingW;
 }
 
+float DeliverMan::getCost() const {
+    return this->cost;
+}
+
 bool DeliverMan::addDeliver(Deliver &deliver) {
 
     if(this->remainingVol - deliver.getVolume() < 0 || remainingW - deliver.getWeight() < 0) {

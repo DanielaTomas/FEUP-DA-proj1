@@ -30,6 +30,9 @@ public:
     //! Get package volume to be transported
     //!
     //! \return volume
+
+    int getId() const;
+
     int getVolume() const;
     //! Get package weight to be transported
     //!

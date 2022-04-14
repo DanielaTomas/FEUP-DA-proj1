@@ -133,7 +133,6 @@ float thirdScenery(std::vector<Deliver> delivers) {
     printf("Average time: %.2f seconds\n", avgTime);
     cout << "Average time: " << avgTimeHours << " hours." << endl;
 
-
     return avgTime;
 }
 

@@ -19,6 +19,8 @@ private:
     float reward;
     //! Estimated delivery time
     int duration;
+
+    float sumWeiVol;
 public:
     //! Constructor
     //!

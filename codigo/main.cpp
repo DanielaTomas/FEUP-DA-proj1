@@ -1,9 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <set>
-#include "DeliverMan.h"
 #include "Utils.h"
-#include <cstdlib>
 using namespace std;
 
 
@@ -116,7 +114,7 @@ bool secondScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deli
                 carrinhausada= true;
             }
         }
-        if(carrinhausada==true) {
+        if(carrinhausada) {
             custo += deliverMan.getCost();
             carrinhausada = false;
         }
@@ -159,8 +157,6 @@ int main() {
     std::vector<Deliver> delivers;
     std::vector<DeliverMan> deliverMen;
     int num;
-
-
 
     std::cout << "Choose a Scenery: ";
     std::cin >> num;

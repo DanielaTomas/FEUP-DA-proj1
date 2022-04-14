@@ -29,12 +29,13 @@ public:
     //! \param reward Reward for performing the service
     //! \param duration Estimated delivery time
     Deliver(int volume, int weight, float reward, int duration);
+    //! Get Id
+    //!
+    //! \return id
+    int getId() const;
     //! Get package volume to be transported
     //!
     //! \return volume
-
-    int getId() const;
-
     int getVolume() const;
     //! Get package weight to be transported
     //!

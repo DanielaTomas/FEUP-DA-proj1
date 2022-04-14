@@ -10,32 +10,23 @@ void parseString(std::string& line, std::vector<std::string>& values) {
     }
 }
 
-void readFiles(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deliverMen) {
+template <typename T>
+void readFiles(std::vector<T>& objects, std::string& filepath) {
 
     std::ifstream file;
 
-    file.open("../../dataset/carrinhas_test.txt");
+    file.open(filepath);
 
     if(!file.is_open()) {
         std::cout << "Error opening file!" << std::endl;
         exit(1);
     }
 
-    parseFile(file, deliverMen);
-
-    file.close();
-
-    file.open("../../dataset/encomendas_test.txt");
-
-    if(!file.is_open()) {
-        std::cout << "Error opening file!" << std::endl;
-        exit(1);
-    }
-
-    parseFile(file, delivers);
+    parseFile(file, objects);
 
     file.close();
 }
+
 
 template <typename T>
 void parseFile(std::ifstream& file, std::vector<T>& objects) {

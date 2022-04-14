@@ -41,6 +41,10 @@ public:
     int getId() const;
 
     int getRemainingVol() const;
+    //! Get Remaining Cost
+    //!
+    //! \return cost
+    float getCost() const;
     //! Get Remaining Weight
     //!
     //! \return weight

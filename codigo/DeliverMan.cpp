@@ -64,3 +64,7 @@ bool operator<(const DeliverMan &d1, const DeliverMan &d2) {
     }
 }
 
+int DeliverMan::getId() const {
+    return this->id;
+}
+

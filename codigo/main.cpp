@@ -1,10 +1,9 @@
-#include <iostream>
+#include "Utils.h"
 #include <algorithm>
 #include <set>
-#include "Utils.h"
 using namespace std;
 
-
+/*
 int checkBestFit(set<DeliverMan*>& usedDeliverMen, Deliver& deliver) {
 
     int volume = 999999;
@@ -26,18 +25,21 @@ int checkBestFit(set<DeliverMan*>& usedDeliverMen, Deliver& deliver) {
     return id;
 }
 
-DeliverMan& searchForDeliverMan(int id, vector<DeliverMan>& deliverMen) {
+
+DeliverMan* searchForDeliverMan(int id, vector<DeliverMan>& deliverMen) {
+
+    DeliverMan* deliverMan1;
 
     for(auto & deliverMan : deliverMen) {
         if(deliverMan.getId() == id) {
-            return deliverMan;
+            deliverMan1 = new DeliverMan(deliverMan);
+            break;
         }
     }
-    DeliverMan deliverMan1;
 
     return deliverMan1;
 }
-
+*/
 
 int firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deliverMen) {
 
@@ -46,23 +48,31 @@ int firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& delive
     sort(delivers.begin(), delivers.end());
     reverse(delivers.begin(), delivers.end());
 
-    vector<DeliverMan> deliverMenFF = deliverMen;
-    std::set<DeliverMan> resultFF;
+    std::set<DeliverMan> result;
+
+    int totalDuration = 0;
 
     //First fit: Vai pondo cada encomenda logo no primeiro estafeta que der.
     for(auto deliver : delivers) {
-        for(auto & deliverMan : deliverMenFF) {
+        if(totalDuration >= 28800) { //8 horas de trabalho
+            break;
+        }
+        for(auto & deliverMan : deliverMen) {
             if(deliverMan.addDeliver(deliver)) {
-                resultFF.insert(deliverMan);
+                totalDuration += deliver.getDuration();
+                result.insert(deliverMan);
                 break;
             }
         }
     }
 
+    /*
     vector<DeliverMan> deliverMenBF = deliverMen;
     set<DeliverMan> resultBF;
+    */
 
     //Best fit: Vai pondo cada encomenda no melhor estafeta(no que sobrar menos espaço).
+    /*
     std::set<DeliverMan*> usedDeliverMen;
     for(auto deliver : delivers) {
         int deliverManId = checkBestFit(usedDeliverMen, deliver);
@@ -92,6 +102,9 @@ int firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& delive
         deliverMen = deliverMenBF;
         return resultBF.size();
     }
+    */
+    return result.size();
+
 }
 bool compareRacio(const Deliver &d1, const Deliver &d2) {
     return (d1.getReward()/d1.getWeight()) > (d2.getReward()/d2.getWeight());
@@ -100,7 +113,8 @@ bool compareCost(const DeliverMan &dm1, const DeliverMan &dm2) {
     return dm1.getCost() < dm2.getCost();
 }
 
-bool secondScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deliverMen) {
+void secondScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deliverMen) {
+
     sort(delivers.begin(), delivers.end(),compareRacio);
     sort(deliverMen.begin(), deliverMen.end(), compareCost);
     int custo=0;
@@ -156,6 +170,7 @@ int main() {
 
     std::vector<Deliver> delivers;
     std::vector<DeliverMan> deliverMen;
+    string filepath1 = "../../dataset/encomendas_test.txt", filepath2 = "../../dataset/carrinhas_test.txt";
     int num;
 
     std::cout << "Choose a Scenery: ";
@@ -163,17 +178,20 @@ int main() {
 
     switch(num) {
         case 1:
-            readFiles(delivers, "../../dataset/encomendas_test.txt");
-            readFiles(deliverMen, "../../dataset/carrinhas_test.txt");
-            cout << "Numero de estafetas usados for the best option: " << firstScenery(delivers, deliverMen) << endl;
+            int numDeliverMen;
+            readFiles(delivers, filepath1);
+            readFiles(deliverMen, filepath2);
+            cout << "efwfew" << endl;
+            numDeliverMen = firstScenery(delivers, deliverMen);
+            cout << "Numero de estafetas usados for the best option: " << numDeliverMen << endl;
             break;
         case 2:
-            readFiles(delivers, "../../dataset/encomendas_test.txt");
-            readFiles(deliverMen, "../../dataset/carrinhas_test.txt");
+            readFiles(delivers, filepath1);
+            readFiles(deliverMen, filepath2);
             secondScenery(delivers, deliverMen);
             break;
         case 3:
-            readFiles(delivers, "../../dataset/encomendas_test.txt");
+            readFiles(delivers, filepath1);
             thirdScenery(delivers);
             break;
         default:

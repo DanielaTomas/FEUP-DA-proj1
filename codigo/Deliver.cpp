@@ -11,6 +11,10 @@ Deliver::Deliver(int volume, int weight, float reward, int duration) : id(curren
     this->sumWeiVol = this->volume + this->weight;
 }
 
+int Deliver::getId() const {
+    return this->id;
+}
+
 int Deliver::getVolume() const {
     return this->volume;
 }
@@ -32,6 +36,3 @@ bool operator<(const Deliver &d1, const Deliver &d2) {
     return d1.sumWeiVol < d2.sumWeiVol;
 }
 
-int Deliver::getId() const {
-    return this->id;
-}

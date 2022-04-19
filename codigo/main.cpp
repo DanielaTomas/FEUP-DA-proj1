@@ -27,7 +27,6 @@ int firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& delive
     }
 
     return result.size();
-
 }
 bool compareRacio(const Deliver &d1, const Deliver &d2) {
     return (d1.getReward()/(float)d1.getWeight()) > (d2.getReward()/(float)d2.getWeight());

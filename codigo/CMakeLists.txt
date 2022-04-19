@@ -3,7 +3,7 @@ project(codigo)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(codigo main.cpp Deliver.cpp Deliver.h DeliverMan.cpp DeliverMan.h Utils.cpp Utils.h tests.cpp)
+add_executable(codigo main.cpp Deliver.cpp Deliver.h DeliverMan.cpp DeliverMan.h Utils.cpp Utils.h)
 
 # Doxygen-generated documentation
 find_package(Doxygen)

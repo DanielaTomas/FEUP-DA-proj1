@@ -31,12 +31,13 @@ public:
     //! \param maxW Carrying capacity (maximum weight)
     //! \param cost Transport cost that will be paid by the company
     DeliverMan(int maxVol, int maxW, float cost);
+    //! Get ID
+    //!
+    //! \return id
+    int getId() const;
     //! Get Remaining Volume
     //!
     //! \return volume
-
-    int getId() const;
-
     int getRemainingVol() const;
     //! Get Remaining Cost
     //!
@@ -50,14 +51,19 @@ public:
     //!
     //! \param deliver
     //! \return bool
-
     bool addDeliver(Deliver& deliver);
-
+    //! Comparison operator (==)
+    //!
+    //! \param d1 DeliverMan 1
+    //! \param d2 DeliverMan 2
+    //! \return Corresponding bool
     friend bool operator==(const DeliverMan& d1, const DeliverMan& d2);
-
+    //! Comparison operator (<)
+    //!
+    //! \param d1 DeliverMan 1
+    //! \param d2 DeliverMan 2
+    //! \return Corresponding bool
     friend bool operator<(const DeliverMan& d1, const DeliverMan& d2);
-
-    //friend bool operator=(const DeliverMan& d1, const DeliverMan& d2);
 };
 
 

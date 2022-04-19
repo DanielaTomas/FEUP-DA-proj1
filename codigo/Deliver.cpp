@@ -8,7 +8,7 @@ Deliver::Deliver(int volume, int weight, float reward, int duration) : id(curren
     this->weight = weight;
     this->duration = duration;
     this->reward = reward;
-    this->sumWeiVol = this->volume + this->weight;
+    this->sumWeiVol = (float)this->volume + (float)this->weight;
 }
 
 int Deliver::getId() const {

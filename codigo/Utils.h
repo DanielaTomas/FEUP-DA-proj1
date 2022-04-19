@@ -24,8 +24,6 @@ void readFiles(std::vector<T>& objects, std::string& filepath) {
 
     parseFile(file, objects);
 
-    std::cout << "fewfew" << std::endl;
-
     file.close();
 }
 
@@ -44,6 +42,85 @@ void parseFile(std::ifstream& file, std::vector<T>& objects) {
 
     }
 }
+
+/*
+    vector<DeliverMan> deliverMenBF = deliverMen;
+    set<DeliverMan> resultBF;
+    */
+
+//Best fit: Vai pondo cada encomenda no melhor estafeta(no que sobrar menos espaço).
+/*
+std::set<DeliverMan*> usedDeliverMen;
+for(auto deliver : delivers) {
+    int deliverManId = checkBestFit(usedDeliverMen, deliver);
+    if(deliverManId != -1) {
+        DeliverMan& deliverMan = searchForDeliverMan(deliverManId, deliverMenBF);
+        if(deliverMan.getId() != -1) {
+            deliverMan.addDeliver(deliver);
+            continue;
+        }
+    }
+    for(auto & deliverMan : deliverMenBF) {
+        if(deliverMan.addDeliver(deliver)) {
+            usedDeliverMen.insert(&deliverMan);
+            resultBF.insert(deliverMan);
+            break;
+        }
+    }
+}
+
+cout << "First Fit: " << resultFF.size() << endl;
+cout << "Best Fit: " << resultBF.size() << endl;
+
+if(resultFF.size() < resultBF.size()) {
+    deliverMen = deliverMenFF;
+    return resultFF.size();
+}else {
+    deliverMen = deliverMenBF;
+    return resultBF.size();
+}
+*/
+
+
+
+
+/*
+int checkBestFit(set<DeliverMan*>& usedDeliverMen, Deliver& deliver) {
+
+    int volume = 999999;
+    int weight = 999999;
+    int id = -1;
+
+    for(auto & usedDeliverMan : usedDeliverMen) {
+        if(deliver.getWeight() <= usedDeliverMan->getRemainingW()
+        && deliver.getVolume() <= usedDeliverMan->getRemainingVol()) {
+            if(usedDeliverMan->getRemainingVol() < volume
+            && usedDeliverMan->getRemainingW() < weight) {
+                volume = usedDeliverMan->getRemainingVol();
+                weight = usedDeliverMan->getRemainingW();
+                id = usedDeliverMan->getId();
+            }
+        }
+    }
+
+    return id;
+}
+
+
+DeliverMan* searchForDeliverMan(int id, vector<DeliverMan>& deliverMen) {
+
+    DeliverMan* deliverMan1;
+
+    for(auto & deliverMan : deliverMen) {
+        if(deliverMan.getId() == id) {
+            deliverMan1 = new DeliverMan(deliverMan);
+            break;
+        }
+    }
+
+    return deliverMan1;
+}
+*/
 
 
 #endif //CODIGO_UTILS_H

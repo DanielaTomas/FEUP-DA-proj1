@@ -24,10 +24,7 @@ private:
     std::string carPlate;
     //! A vector of delivers
     std::vector<Deliver> delivers;
-    //! Check if DeliverMan is full
-    bool full;
 public:
-    DeliverMan();
     //! Constructor
     //!
     //! \param maxVol Carrying capacity (maximum volume)
@@ -53,8 +50,6 @@ public:
     //!
     //! \param deliver
     //! \return bool
-
-    bool getFull() const;
 
     bool addDeliver(Deliver& deliver);
 

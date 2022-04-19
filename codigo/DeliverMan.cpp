@@ -7,10 +7,13 @@ DeliverMan::DeliverMan(int maxVol, int maxW, float cost) : id(current_id++){
     this->maxVol = maxVol;
     this->maxW = maxW;
     this->cost = cost;
-    this->full = false;
     this->remainingW = maxW;
     this->remainingVol = maxVol;
 
+}
+
+int DeliverMan::getId() const {
+    return this->id;
 }
 
 int DeliverMan::getRemainingVol() const {
@@ -64,7 +67,4 @@ bool operator<(const DeliverMan &d1, const DeliverMan &d2) {
     }
 }
 
-int DeliverMan::getId() const {
-    return this->id;
-}
 

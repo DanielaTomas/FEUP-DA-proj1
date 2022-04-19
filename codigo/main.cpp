@@ -3,43 +3,6 @@
 #include <set>
 using namespace std;
 
-/*
-int checkBestFit(set<DeliverMan*>& usedDeliverMen, Deliver& deliver) {
-
-    int volume = 999999;
-    int weight = 999999;
-    int id = -1;
-
-    for(auto & usedDeliverMan : usedDeliverMen) {
-        if(deliver.getWeight() <= usedDeliverMan->getRemainingW()
-        && deliver.getVolume() <= usedDeliverMan->getRemainingVol()) {
-            if(usedDeliverMan->getRemainingVol() < volume
-            && usedDeliverMan->getRemainingW() < weight) {
-                volume = usedDeliverMan->getRemainingVol();
-                weight = usedDeliverMan->getRemainingW();
-                id = usedDeliverMan->getId();
-            }
-        }
-    }
-
-    return id;
-}
-
-
-DeliverMan* searchForDeliverMan(int id, vector<DeliverMan>& deliverMen) {
-
-    DeliverMan* deliverMan1;
-
-    for(auto & deliverMan : deliverMen) {
-        if(deliverMan.getId() == id) {
-            deliverMan1 = new DeliverMan(deliverMan);
-            break;
-        }
-    }
-
-    return deliverMan1;
-}
-*/
 
 int firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deliverMen) {
 
@@ -52,11 +15,8 @@ int firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& delive
 
     int totalDuration = 0;
 
-    //First fit: Vai pondo cada encomenda logo no primeiro estafeta que der.
+    //First fit.
     for(auto deliver : delivers) {
-        if(totalDuration >= 28800) { //8 horas de trabalho
-            break;
-        }
         for(auto & deliverMan : deliverMen) {
             if(deliverMan.addDeliver(deliver)) {
                 totalDuration += deliver.getDuration();
@@ -66,48 +26,11 @@ int firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& delive
         }
     }
 
-    /*
-    vector<DeliverMan> deliverMenBF = deliverMen;
-    set<DeliverMan> resultBF;
-    */
-
-    //Best fit: Vai pondo cada encomenda no melhor estafeta(no que sobrar menos espaço).
-    /*
-    std::set<DeliverMan*> usedDeliverMen;
-    for(auto deliver : delivers) {
-        int deliverManId = checkBestFit(usedDeliverMen, deliver);
-        if(deliverManId != -1) {
-            DeliverMan& deliverMan = searchForDeliverMan(deliverManId, deliverMenBF);
-            if(deliverMan.getId() != -1) {
-                deliverMan.addDeliver(deliver);
-                continue;
-            }
-        }
-        for(auto & deliverMan : deliverMenBF) {
-            if(deliverMan.addDeliver(deliver)) {
-                usedDeliverMen.insert(&deliverMan);
-                resultBF.insert(deliverMan);
-                break;
-            }
-        }
-    }
-
-    cout << "First Fit: " << resultFF.size() << endl;
-    cout << "Best Fit: " << resultBF.size() << endl;
-
-    if(resultFF.size() < resultBF.size()) {
-        deliverMen = deliverMenFF;
-        return resultFF.size();
-    }else {
-        deliverMen = deliverMenBF;
-        return resultBF.size();
-    }
-    */
     return result.size();
 
 }
 bool compareRacio(const Deliver &d1, const Deliver &d2) {
-    return (d1.getReward()/d1.getWeight()) > (d2.getReward()/d2.getWeight());
+    return (d1.getReward()/(float)d1.getWeight()) > (d2.getReward()/(float)d2.getWeight());
 }
 bool compareCost(const DeliverMan &dm1, const DeliverMan &dm2) {
     return dm1.getCost() < dm2.getCost();
@@ -117,23 +40,23 @@ void secondScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deli
 
     sort(delivers.begin(), delivers.end(),compareRacio);
     sort(deliverMen.begin(), deliverMen.end(), compareCost);
-    int custo=0;
-    int pagamento=0;
-    bool carrinhausada=false;
+    float cost = 0;
+    float payment = 0;
+    bool usedVan = false;
     for(auto deliverMan : deliverMen){
         for(auto deliver : delivers){
-            if((deliverMan.getRemainingW() >= deliver.getWeight()) && (deliverMan.getRemainingVol()>= deliver.getVolume())) {
-                deliverMan.addDeliver(deliver);
-                pagamento+=deliver.getReward();
-                carrinhausada= true;
+            if(deliverMan.addDeliver(deliver)) {
+                payment += deliver.getReward();
+                usedVan = true;
             }
         }
-        if(carrinhausada) {
-            custo += deliverMan.getCost();
-            carrinhausada = false;
+        if(usedVan) {
+            cost += deliverMan.getCost();
+            usedVan = false;
         }
     }
-    cout<<"Lucro: "<<pagamento-custo<<endl;
+
+    cout << "Profit: "<< payment-cost << endl;
 }
 
 
@@ -159,9 +82,7 @@ float thirdScenery(std::vector<Deliver> delivers) {
     }
 
     float avgTime = (float)sum/(float)maxDelivers;
-    float avgTimeHours = avgTime/120;
     printf("Average time: %.2f seconds\n", avgTime);
-    cout << "Average time: " << avgTimeHours << " hours." << endl;
 
     return avgTime;
 }
@@ -181,9 +102,8 @@ int main() {
             int numDeliverMen;
             readFiles(delivers, filepath1);
             readFiles(deliverMen, filepath2);
-            cout << "efwfew" << endl;
             numDeliverMen = firstScenery(delivers, deliverMen);
-            cout << "Numero de estafetas usados for the best option: " << numDeliverMen << endl;
+            cout << "Number of used deliver man: " << numDeliverMen << endl;
             break;
         case 2:
             readFiles(delivers, filepath1);

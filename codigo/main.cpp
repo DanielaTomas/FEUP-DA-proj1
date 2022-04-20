@@ -60,6 +60,7 @@ void secondScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deli
 
 
 bool compareDuration(const Deliver &d1, const Deliver &d2) {
+    if(d1.getDuration() == d2.getDuration()) return d1.getId() < d2.getId();
     return d1.getDuration() < d2.getDuration();
 }
 float thirdScenery(std::vector<Deliver> delivers) {
@@ -69,6 +70,7 @@ float thirdScenery(std::vector<Deliver> delivers) {
     sort(delivers.begin(), delivers.end(),compareDuration);
 
     int maxDelivers= 0, sum = 0;
+
     for(int i = 0; i < delivers.size(); i++) {
         if(sum+delivers[i].getDuration() <= 28800) {   //9h00-17h00 -> 8 hours = 28800 seconds
             sum += delivers[i].getDuration();
@@ -90,7 +92,7 @@ int main() {
 
     std::vector<Deliver> delivers;
     std::vector<DeliverMan> deliverMen;
-    string filepath1 = "../../dataset/encomendas_test.txt", filepath2 = "../../dataset/carrinhas_test.txt";
+    string filepath1 = "../../dataset/encomendas.txt", filepath2 = "../../dataset/carrinhas.txt";
     int num;
 
     std::cout << "Choose a Scenery: ";

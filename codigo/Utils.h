@@ -6,10 +6,26 @@
 #include <sstream>
 #include "DeliverMan.h"
 
+//! Create Object (DeliverMan)
+//!
+//! \param deliverMen
+//! \param values
 void createObject(std::vector<DeliverMan>& deliverMen, std::vector<std::string>& values);
+//! Create Object (Deliver)
+//!
+//! \param delivers
+//! \param values
 void createObject(std::vector<Deliver>& delivers, std::vector<std::string>& values);
+//! Breaks string line into a series of tokens using the space as the delimiter. Tokens are stored in values
+//!
+//! \param line
+//! \param values
 void parseString(std::string& line, std::vector<std::string>& values);
-
+//! Read Files
+//!
+//! \tparam T
+//! \param objects
+//! \param filepath
 template <typename T>
 void readFiles(std::vector<T>& objects, std::string& filepath) {
 
@@ -26,7 +42,11 @@ void readFiles(std::vector<T>& objects, std::string& filepath) {
 
     file.close();
 }
-
+//! Parse File
+//!
+//! \tparam T
+//! \param file
+//! \param objects
 template <typename T>
 void parseFile(std::ifstream& file, std::vector<T>& objects) {
 

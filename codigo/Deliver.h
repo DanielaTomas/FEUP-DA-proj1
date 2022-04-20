@@ -49,6 +49,9 @@ public:
     //!
     //! \return duration
     int getDuration() const;
+
+    int getSumWeiVol() const;
+
     //! Compare delivers (<)
     //!
     //! \param d1 deliver 1

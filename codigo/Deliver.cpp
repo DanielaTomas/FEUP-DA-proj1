@@ -36,3 +36,7 @@ bool operator<(const Deliver &d1, const Deliver &d2) {
     return d1.sumWeiVol < d2.sumWeiVol;
 }
 
+int Deliver::getSumWeiVol() const {
+    return this->sumWeiVol;
+}
+

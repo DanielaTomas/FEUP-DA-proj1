@@ -3,23 +3,23 @@
 #include <set>
 using namespace std;
 
+bool compareDelivers(const Deliver &d1, const Deliver &d2) {
+    return d1.getSumWeiVol() > d2.getSumWeiVol();
+}
 
 int firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deliverMen) {
 
     //Bin packing
 
-    sort(delivers.begin(), delivers.end());
-    reverse(delivers.begin(), delivers.end());
+    sort(delivers.begin(), delivers.end(), compareDelivers);
 
     std::set<DeliverMan> result;
 
-    int totalDuration = 0;
 
-    //First fit.
+    //First fit
     for(auto deliver : delivers) {
         for(auto & deliverMan : deliverMen) {
             if(deliverMan.addDeliver(deliver)) {
-                totalDuration += deliver.getDuration();
                 result.insert(deliverMan);
                 break;
             }
@@ -28,6 +28,7 @@ int firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& delive
 
     return result.size();
 }
+
 bool compareRacio(const Deliver &d1, const Deliver &d2) {
     return (d1.getReward()/(float)d1.getWeight()) > (d2.getReward()/(float)d2.getWeight());
 }
@@ -37,21 +38,23 @@ bool compareCost(const DeliverMan &dm1, const DeliverMan &dm2) {
 
 void secondScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deliverMen) {
 
+    std::set<DeliverMan> usedDeliverMen;
+
     sort(delivers.begin(), delivers.end(),compareRacio);
     sort(deliverMen.begin(), deliverMen.end(), compareCost);
     float cost = 0;
     float payment = 0;
-    bool usedVan = false;
-    for(auto deliverMan : deliverMen){
-        for(auto deliver : delivers){
+
+    for(auto deliver : delivers){
+        for(auto & deliverMan : deliverMen){
             if(deliverMan.addDeliver(deliver)) {
                 payment += deliver.getReward();
-                usedVan = true;
+                if(usedDeliverMen.find(deliverMan) == usedDeliverMen.end()) {
+                    cost += deliverMan.getCost();
+                }
+                usedDeliverMen.insert(deliverMan);
+                break;
             }
-        }
-        if(usedVan) {
-            cost += deliverMan.getCost();
-            usedVan = false;
         }
     }
 
@@ -90,7 +93,7 @@ int main() {
 
     std::vector<Deliver> delivers;
     std::vector<DeliverMan> deliverMen;
-    string filepath1 = "../../dataset/encomendas_test.txt", filepath2 = "../../dataset/carrinhas_test.txt";
+    string filepath1 = "../../dataset/encomendas.txt", filepath2 = "../../dataset/carrinhas.txt";
     int num;
 
     std::cout << "Choose a Scenery: ";

@@ -32,7 +32,6 @@ int Deliver::getDuration() const {
 }
 
 bool operator<(const Deliver &d1, const Deliver &d2) {
-
     return d1.sumWeiVol < d2.sumWeiVol;
 }
 

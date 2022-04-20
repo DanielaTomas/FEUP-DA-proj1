@@ -4,7 +4,7 @@
 using namespace std;
 
 
-int firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deliverMen) {
+unsigned long firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deliverMen) {
 
     //Bin packing
 
@@ -13,13 +13,10 @@ int firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& delive
 
     std::set<DeliverMan> result;
 
-    int totalDuration = 0;
-
-    //First fit.
+    //First fit
     for(auto deliver : delivers) {
         for(auto & deliverMan : deliverMen) {
             if(deliverMan.addDeliver(deliver)) {
-                totalDuration += deliver.getDuration();
                 result.insert(deliverMan);
                 break;
             }
@@ -100,7 +97,7 @@ int main() {
 
     switch(num) {
         case 1:
-            int numDeliverMen;
+            unsigned long numDeliverMen;
             readFiles(delivers, filepath1);
             readFiles(deliverMen, filepath2);
             numDeliverMen = firstScenery(delivers, deliverMen);

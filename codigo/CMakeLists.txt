@@ -9,6 +9,7 @@ add_executable(codigo main.cpp Deliver.cpp Deliver.h DeliverMan.cpp DeliverMan.h
 find_package(Doxygen)
 
 if(DOXYGEN_FOUND)
+    set(DOXYGEN_EXTRACT_ALL "YES")
     set(DOXYGEN_EXTRACT_PRIVATE "YES")
     set(DOXYGEN_EXTRACT_STATIC "YES")
     set(DOXYGEN_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})

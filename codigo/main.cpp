@@ -7,14 +7,13 @@ bool compareDelivers(const Deliver &d1, const Deliver &d2) {
     return d1.getSumWeiVol() > d2.getSumWeiVol();
 }
 
-int firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deliverMen) {
+unsigned long firstScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deliverMen) {
 
     //Bin packing
 
     sort(delivers.begin(), delivers.end(), compareDelivers);
 
     std::set<DeliverMan> result;
-
 
     //First fit
     for(auto deliver : delivers) {
@@ -63,6 +62,7 @@ void secondScenery(std::vector<Deliver>& delivers, std::vector<DeliverMan>& deli
 
 
 bool compareDuration(const Deliver &d1, const Deliver &d2) {
+    if(d1.getDuration() == d2.getDuration()) return d1.getId() < d2.getId();
     return d1.getDuration() < d2.getDuration();
 }
 float thirdScenery(std::vector<Deliver> delivers) {
@@ -72,6 +72,7 @@ float thirdScenery(std::vector<Deliver> delivers) {
     sort(delivers.begin(), delivers.end(),compareDuration);
 
     int maxDelivers= 0, sum = 0;
+
     for(int i = 0; i < delivers.size(); i++) {
         if(sum+delivers[i].getDuration() <= 28800) {   //9h00-17h00 -> 8 hours = 28800 seconds
             sum += delivers[i].getDuration();
@@ -101,7 +102,7 @@ int main() {
 
     switch(num) {
         case 1:
-            int numDeliverMen;
+            unsigned long numDeliverMen;
             readFiles(delivers, filepath1);
             readFiles(deliverMen, filepath2);
             numDeliverMen = firstScenery(delivers, deliverMen);

@@ -58,11 +58,7 @@ bool operator<(const DeliverMan &d1, const DeliverMan &d2) {
         }else if(d1.maxVol > d2.maxVol) {
             return false;
         }else {
-            if(d1.maxW < d2.maxW) {
-                return true;
-            }else {
-                return false;
-            }
+            return d1.maxW < d2.maxW;
         }
     }
 }

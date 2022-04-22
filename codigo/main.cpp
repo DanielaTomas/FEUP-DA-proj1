@@ -94,7 +94,7 @@ int main() {
 
     std::vector<Deliver> delivers;
     std::vector<DeliverMan> deliverMen;
-    string filepath1 = "../../dataset/encomendas.txt", filepath2 = "../../dataset/carrinhas.txt";
+    string filepath1 = "../../input/encomendas.txt", filepath2 = "../../input/carrinhas.txt";
     int num;
 
     std::cout << "Choose a Scenery: ";
